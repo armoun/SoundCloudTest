@@ -45,6 +45,8 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
 	    if (mediaPlayer != null && mediaPlayer.isPlaying()) {
 		mediaPlayer.stop();
 		mediaPlayer.release();
+		mediaPlayer = null;
+		
 		((Button) getActivity().findViewById(R.id.button_stream)).setText(getResources().getString(R.string.stream));
 		return;
 

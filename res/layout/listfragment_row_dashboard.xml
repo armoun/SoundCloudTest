@@ -8,16 +8,20 @@
         android:id="@+id/textview_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:gravity="left|top"
-        android:paddingLeft="3dp" />
+        android:paddingLeft="3dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textview_created_at"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
         android:layout_toRightOf="@id/textview_username"
-        android:gravity="right|top" />
+        android:gravity="right|top"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageview_avatar"
@@ -38,31 +42,64 @@
         android:gravity="top"
         android:paddingLeft="8dp" />
 
+    <ImageView
+        android:id="@+id/imageview_plays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/textview_title"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/imageview_avatar"
+        android:src="@drawable/play"
+        android:contentDescription="@string/content" />
+
     <TextView
         android:id="@+id/textview_plays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_below="@id/textview_title"
-        android:layout_toRightOf="@id/imageview_avatar"
         android:layout_marginLeft="5dp"
-        android:layout_alignParentBottom="true" />
+        android:layout_toRightOf="@id/imageview_plays" />
+
+    <ImageView
+        android:id="@+id/imageview_favourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/textview_title"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/textview_plays"
+        android:src="@drawable/comment"
+        android:contentDescription="@string/content" />
 
     <TextView
         android:id="@+id/textview_favourites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_below="@id/textview_title"
-        android:layout_toRightOf="@id/textview_plays"
         android:layout_marginLeft="5dp"
-        android:layout_alignParentBottom="true" />
+        android:layout_toRightOf="@id/imageview_favourites" />
+
+    <ImageView
+        android:id="@+id/imageview_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/textview_title"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/textview_favourites"
+        android:src="@drawable/heart"
+        android:contentDescription="@string/content" />
 
     <TextView
         android:id="@+id/textview_comments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_below="@id/textview_title"
-        android:layout_toRightOf="@id/textview_favourites"
         android:layout_marginLeft="5dp"
-        android:layout_alignParentBottom="true" />
+        android:layout_toRightOf="@id/imageview_comments" />
 
 </RelativeLayout>

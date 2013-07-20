@@ -11,5 +11,6 @@
     <string name="prompt_email">Email Address</string>
     <string name="action_sign_in_short">Sign In</string>
     <string name="again">Again!</string>
+    <string name="content">Content description</string>
 
 </resources>
