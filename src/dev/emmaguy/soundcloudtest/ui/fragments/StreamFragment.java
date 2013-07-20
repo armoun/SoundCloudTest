@@ -41,12 +41,13 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
 		Toast.makeText(getActivity(), "No track to stream :-(", Toast.LENGTH_SHORT).show();
 		return;
 	    }
-	    
-	    if(mediaPlayer != null && mediaPlayer.isPlaying()){
+
+	    if (mediaPlayer != null && mediaPlayer.isPlaying()) {
 		mediaPlayer.stop();
 		mediaPlayer.release();
+		((Button) getActivity().findViewById(R.id.button_stream)).setText(getResources().getString(R.string.stream));
 		return;
-		
+
 	    } else {
 		mediaPlayer = new MediaPlayer();
 		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -77,6 +78,7 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
     @Override
     public void onCompletion(MediaPlayer mp) {
 	Toast.makeText(getActivity(), "End of playback", Toast.LENGTH_SHORT).show();
+	((Button) getActivity().findViewById(R.id.button_stream)).setText(getResources().getString(R.string.again));
     }
 
     @Override
@@ -92,6 +94,5 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
 	mp.start();
 
 	((Button) getActivity().findViewById(R.id.button_stream)).setText(getResources().getString(R.string.pause));
-	;
     }
 }

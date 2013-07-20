@@ -80,14 +80,14 @@ public class TracksAdapter extends ArrayAdapter<Track> {
 
 	final Bitmap artwork = trackImageCache.get(track.id);
 	if (artwork == null) {
-	    new DownloadImageAsyncTask(track.id, trackImageCache, track.artwork_url, holder.Avatar).execute();
+	    new DownloadImageAsyncTask(track.id, trackImageCache, track.artwork_url).execute();
 	} else {
 	    holder.Avatar.setImageBitmap(artwork);
 	}
 
 	final Bitmap avatar = userTrackImageCache.get(user.id);
 	if (avatar == null) {
-	    new DownloadImageAsyncTask(user.id, userTrackImageCache, user.avatar_url, holder.Avatar).execute();
+	    new DownloadImageAsyncTask(user.id, userTrackImageCache, user.avatar_url).execute();
 	} else {
 	    holder.Avatar.setImageBitmap(avatar);
 	}

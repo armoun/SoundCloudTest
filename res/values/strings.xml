@@ -10,5 +10,6 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_email">Email Address</string>
     <string name="action_sign_in_short">Sign In</string>
+    <string name="again">Again!</string>
 
 </resources>
