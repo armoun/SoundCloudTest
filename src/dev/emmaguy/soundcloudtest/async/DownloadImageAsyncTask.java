@@ -11,17 +11,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 
 public class DownloadImageAsyncTask extends AsyncTask<Void, Void, byte[]> {
     
     private final long id;
     private final Map<Long, Bitmap> bitmapCache;
     private String imageUrl;
+    private ImageView imageView;
 
-    public DownloadImageAsyncTask(long id, Map<Long, Bitmap> cache, String imageUrl) {
+    public DownloadImageAsyncTask(long id, Map<Long, Bitmap> cache, String imageUrl, ImageView imageView) {
 	this.id = id;
 	this.bitmapCache = cache;
 	this.imageUrl = imageUrl;
+	this.imageView = imageView;
     }
 
     protected byte[] doInBackground(Void... params) {
@@ -44,7 +47,12 @@ public class DownloadImageAsyncTask extends AsyncTask<Void, Void, byte[]> {
 
     protected void onPostExecute(byte[] bytes) {
 	if(bytes != null && bytes.length > 0) {
-	    bitmapCache.put(id, BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+	    final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+	    bitmapCache.put(id, bitmap);
+	    
+	    if(imageView != null) {
+		imageView.setImageBitmap(bitmap);
+	    }
 	}
     }
 }

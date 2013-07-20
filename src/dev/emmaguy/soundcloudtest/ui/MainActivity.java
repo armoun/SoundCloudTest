@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import dev.emmaguy.soundcloudtest.R;
-import dev.emmaguy.soundcloudtest.SoundCloudActivity;
-import dev.emmaguy.soundcloudtest.async.GetSoundCloudActivitiesAsyncTask.OnRetrievedActivitiesListener;
+import dev.emmaguy.soundcloudtest.Track;
+import dev.emmaguy.soundcloudtest.async.GetSoundCloudTracksAsyncTask.OnRetrievedActivitiesListener;
 import dev.emmaguy.soundcloudtest.ui.fragments.DashboardFragment;
 import dev.emmaguy.soundcloudtest.ui.fragments.DashboardFragment.OnSoundCloudActivitySelectedListener;
 import dev.emmaguy.soundcloudtest.ui.fragments.SignInFragment;
@@ -34,9 +34,9 @@ public class MainActivity extends FragmentActivity implements OnRetrievedActivit
     }
 
     @Override
-    public void onRetreivedActivities(List<SoundCloudActivity> activities) {
+    public void onRetreivedActivities(List<Track> tracks) {
 	DashboardFragment fragment = new DashboardFragment();
-	fragment.setArguments(activities);
+	fragment.setArguments(tracks);
 	
 	FragmentTransaction transaction = (FragmentTransaction) getSupportFragmentManager().beginTransaction();
 	transaction.replace(R.id.fragment_container, fragment);
@@ -45,9 +45,9 @@ public class MainActivity extends FragmentActivity implements OnRetrievedActivit
     }
 
     @Override
-    public void onSelected(SoundCloudActivity a) {
+    public void onSelected(Track t) {
 	StreamFragment fragment = new StreamFragment();
-	fragment.setArguments(a);
+	fragment.setArguments(t, getResources().getString(R.string.client_id));
 	
 	FragmentTransaction transaction = (FragmentTransaction) getSupportFragmentManager().beginTransaction();
 	transaction.replace(R.id.fragment_container, fragment);

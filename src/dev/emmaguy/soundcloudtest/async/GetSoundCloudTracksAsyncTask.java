@@ -17,10 +17,9 @@ import com.google.gson.reflect.TypeToken;
 import com.soundcloud.api.ApiWrapper;
 import com.soundcloud.api.Request;
 
-import dev.emmaguy.soundcloudtest.SoundCloudActivity;
+import dev.emmaguy.soundcloudtest.Track;
 
-
-public class GetSoundCloudActivitiesAsyncTask extends ProgressAsyncTask<Void, Void, Boolean> {
+public class GetSoundCloudTracksAsyncTask extends ProgressAsyncTask<Void, Void, Boolean> {
 
     private final String clientId;
     private final String clientSecret;
@@ -31,7 +30,7 @@ public class GetSoundCloudActivitiesAsyncTask extends ProgressAsyncTask<Void, Vo
     
     private String jsonResponse;
 
-    public GetSoundCloudActivitiesAsyncTask(String clientId, String clientSecret, String username, String password,
+    public GetSoundCloudTracksAsyncTask(String clientId, String clientSecret, String username, String password,
 	    Context c, String dialogMessage, OnRetrievedActivitiesListener listener) {
 	super(c, dialogMessage);
 
@@ -49,9 +48,8 @@ public class GetSoundCloudActivitiesAsyncTask extends ProgressAsyncTask<Void, Vo
 	try {
 	    wrapper.login(username, password);
 
-	    HttpResponse resp = wrapper.get(Request.to("/me/activities"));
-	    jsonResponse = new JsonParser().parse(EntityUtils.toString(resp.getEntity())).getAsJsonObject()
-		    .get("collection").getAsJsonArray().toString();
+	    HttpResponse resp = wrapper.get(Request.to("/tracks"));
+	    jsonResponse = new JsonParser().parse(EntityUtils.toString(resp.getEntity())).getAsJsonArray().toString();
 
 	    return resp.getStatusLine().getStatusCode() == 200;
 	} catch (IOException e) {
@@ -71,15 +69,14 @@ public class GetSoundCloudActivitiesAsyncTask extends ProgressAsyncTask<Void, Vo
 	}
 
 	if (listener != null) {
-	    final Type type = new TypeToken<List<SoundCloudActivity>>() {
-	    }.getType();
+	    final Type type = new TypeToken<List<Track>>() {}.getType();
 
-	    List<SoundCloudActivity> activities = new Gson().fromJson(jsonResponse, type);
+	    List<Track> activities = new Gson().fromJson(jsonResponse, type);
 	    listener.onRetreivedActivities(activities);
 	}
     }
 
     public interface OnRetrievedActivitiesListener {
-	void onRetreivedActivities(List<SoundCloudActivity> activities);
+	void onRetreivedActivities(List<Track> activities);
     }
 }
