@@ -20,7 +20,6 @@ public class MainActivity extends FragmentActivity implements OnRetrievedActivit
 
 	FragmentTransaction transaction = (FragmentTransaction) getSupportFragmentManager().beginTransaction();
 	transaction.replace(R.id.fragment_container, fragment);
-	transaction.addToBackStack(null);
 	transaction.commit();
     }
 
@@ -28,7 +27,6 @@ public class MainActivity extends FragmentActivity implements OnRetrievedActivit
     public void onRetreivedActivities(List<SoundCloudActivity> activities) {
 	SoundCloudActivitiesFragment fragment = new SoundCloudActivitiesFragment();
 	fragment.setArguments(activities);
-	Log.i("xx", "count: " + activities.size());
 	
 	FragmentTransaction transaction = (FragmentTransaction) getSupportFragmentManager().beginTransaction();
 	transaction.replace(R.id.fragment_container, fragment);

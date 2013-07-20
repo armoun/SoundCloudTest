@@ -2,17 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:paddingBottom="4dp"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textview_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="left"
+        android:gravity="left|top"
         android:paddingLeft="3dp" />
 
     <TextView
@@ -21,8 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/textview_username"
         android:layout_alignParentRight="true"
-        android:gravity="right"
-        android:paddingRight="3dp" />
+        android:gravity="right|top"/>
 
     <ImageView
         android:id="@+id/imageview_avatar"
@@ -40,6 +35,7 @@
         android:layout_height="wrap_content"
         android:gravity="top"
         android:paddingLeft="8dp"
-        android:layout_toRightOf="@id/imageview_avatar" />
+        android:layout_toRightOf="@id/imageview_avatar"
+        android:layout_below="@id/textview_created_at" />
 
 </RelativeLayout>

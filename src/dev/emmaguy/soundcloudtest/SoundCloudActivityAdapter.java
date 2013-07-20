@@ -1,10 +1,12 @@
 package dev.emmaguy.soundcloudtest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import dev.emmaguy.soundcloudtest.GetSoundCloudActivitiesAsyncTask.SoundCloudActivity;
+import dev.emmaguy.soundcloudtest.GetSoundCloudActivitiesAsyncTask.Track;
+import dev.emmaguy.soundcloudtest.GetSoundCloudActivitiesAsyncTask.User;
 
 public class SoundCloudActivityAdapter extends ArrayAdapter<SoundCloudActivity> {
 
@@ -19,60 +23,84 @@ public class SoundCloudActivityAdapter extends ArrayAdapter<SoundCloudActivity> 
     private List<SoundCloudActivity> activities;
     private final int evenRowColor = Color.parseColor("#BBFAFEFA");
     private final int oddRowColour = Color.parseColor("#BBCACACC");
-    private final SparseArray<byte[]> trackImageCache = new SparseArray<byte[]>();
-    private final SparseArray<byte[]> userTrackImageCache = new SparseArray<byte[]>();
-    
+
+    private static final Map<Long, Bitmap> trackImageCache = new HashMap<Long, Bitmap>();
+    private static final Map<Long, Bitmap> userTrackImageCache = new HashMap<Long, Bitmap>();
+
     public SoundCloudActivityAdapter(Context c, int resourceId, List<SoundCloudActivity> activities) {
 	super(c, resourceId, activities);
-	
+
 	this.context = c;
 	this.activities = activities;
     }
-    
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        ViewHolder holder; 
+	View v = convertView;
+	ViewHolder holder;
 
-        if (v == null) {
-            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.row_soundcloud_activtiy, null);
+	if (v == null) {
+	    LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    v = vi.inflate(R.layout.row_soundcloud_activtiy, null);
 
-            holder = new ViewHolder();
-            holder.Username = (TextView) v.findViewById(R.id.textview_username);
-            holder.CreatedAt = (TextView) v.findViewById(R.id.textview_created_at);
-            holder.Title = (TextView) v.findViewById(R.id.textview_title);
-            holder.Avatar = (ImageView) v.findViewById(R.id.imageview_avatar);
+	    holder = new ViewHolder();
+	    holder.Username = (TextView) v.findViewById(R.id.textview_username);
+	    holder.CreatedAt = (TextView) v.findViewById(R.id.textview_created_at);
+	    holder.Title = (TextView) v.findViewById(R.id.textview_title);
+	    holder.Avatar = (ImageView) v.findViewById(R.id.imageview_avatar);
 
-            v.setTag(holder);
-        }
-        else {
-            holder = (ViewHolder)v.getTag();
-        }
-        
-        final SoundCloudActivity soundCloudActivity = activities.get(position);
-        
-	holder.CreatedAt.setText(soundCloudActivity.created_at);
-	if(soundCloudActivity.origin.track != null) {
-	    holder.Title.setText(soundCloudActivity.origin.track.title);
-	}
-	holder.Username.setText(soundCloudActivity.origin.user.username);
-
-	if(position % 2 == 0) {
-	    v.setBackgroundColor(evenRowColor);
+	    v.setTag(holder);
 	} else {
-	    
-	    v.setBackgroundColor(oddRowColour);
+	    holder = (ViewHolder) v.getTag();
 	}
+
+	updateRowContents(position, holder);
+	updateRowBackground(position, v);
+	
 	return v;
     }
-    
-    class ViewHolder 
-    {
+
+    private void updateRowBackground(int position, View v) {
+	if (position % 2 == 0) {
+	    v.setBackgroundColor(evenRowColor);
+	} else {
+
+	    v.setBackgroundColor(oddRowColour);
+	}
+    }
+
+    private void updateRowContents(int position, ViewHolder holder) {
+	final SoundCloudActivity soundCloudActivity = activities.get(position);
+	final User user = soundCloudActivity.origin.user;
+
+	holder.CreatedAt.setText(soundCloudActivity.getCreatedAtDate());
+	if (soundCloudActivity.origin.hasTrack()) {
+
+	    final Track track = soundCloudActivity.origin.track;
+	    final Bitmap artwork = trackImageCache.get(track.id);
+	    if (artwork == null) {
+		new DownloadImageTask(track.id, trackImageCache, track.artwork_url).execute();
+	    } else {
+		holder.Avatar.setImageBitmap(artwork);
+	    }
+	    holder.Title.setText(track.title);
+	}
+
+	holder.Username.setText(user.username);
+
+	final Bitmap avatar = userTrackImageCache.get(user.id);
+	if (avatar == null) {
+	    new DownloadImageTask(user.id, userTrackImageCache, user.avatar_url).execute();
+	} else {
+	    holder.Avatar.setImageBitmap(avatar);
+	}
+    }
+
+    class ViewHolder {
 	public ImageView Avatar;
 	public TextView Title;
 	public TextView CreatedAt;
 	public TextView Username;
-	
+
     }
 }
