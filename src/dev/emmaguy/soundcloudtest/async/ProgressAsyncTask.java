@@ -1,4 +1,4 @@
-package dev.emmaguy.soundcloudtest;
+package dev.emmaguy.soundcloudtest.async;
 
 import android.app.ProgressDialog;
 import android.content.Context;

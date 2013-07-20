@@ -1,4 +1,4 @@
-package dev.emmaguy.soundcloudtest;
+package dev.emmaguy.soundcloudtest.ui.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import dev.emmaguy.soundcloudtest.GetSoundCloudActivitiesAsyncTask.OnRetrievedActivitiesListener;
+import dev.emmaguy.soundcloudtest.R;
+import dev.emmaguy.soundcloudtest.async.GetSoundCloudActivitiesAsyncTask;
+import dev.emmaguy.soundcloudtest.async.GetSoundCloudActivitiesAsyncTask.OnRetrievedActivitiesListener;
 
-public class SignInAndRetrieveActivitiesFragment extends Fragment implements OnClickListener {
+public class SignInFragment extends Fragment implements OnClickListener {
 
     private OnRetrievedActivitiesListener listener;
     

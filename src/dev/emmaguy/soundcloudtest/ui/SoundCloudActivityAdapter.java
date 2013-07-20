@@ -1,4 +1,4 @@
-package dev.emmaguy.soundcloudtest;
+package dev.emmaguy.soundcloudtest.ui;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import dev.emmaguy.soundcloudtest.GetSoundCloudActivitiesAsyncTask.SoundCloudActivity;
-import dev.emmaguy.soundcloudtest.GetSoundCloudActivitiesAsyncTask.Track;
-import dev.emmaguy.soundcloudtest.GetSoundCloudActivitiesAsyncTask.User;
+import dev.emmaguy.soundcloudtest.R;
+import dev.emmaguy.soundcloudtest.SoundCloudActivity;
+import dev.emmaguy.soundcloudtest.Track;
+import dev.emmaguy.soundcloudtest.User;
+import dev.emmaguy.soundcloudtest.async.DownloadImageAsyncTask;
 
 public class SoundCloudActivityAdapter extends ArrayAdapter<SoundCloudActivity> {
 
@@ -41,7 +43,7 @@ public class SoundCloudActivityAdapter extends ArrayAdapter<SoundCloudActivity> 
 
 	if (v == null) {
 	    LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	    v = vi.inflate(R.layout.row_soundcloud_activtiy, null);
+	    v = vi.inflate(R.layout.listfragment_row_soundcloud_activtiy, null);
 
 	    holder = new ViewHolder();
 	    holder.Username = (TextView) v.findViewById(R.id.textview_username);
@@ -79,7 +81,7 @@ public class SoundCloudActivityAdapter extends ArrayAdapter<SoundCloudActivity> 
 	    final Track track = soundCloudActivity.origin.track;
 	    final Bitmap artwork = trackImageCache.get(track.id);
 	    if (artwork == null) {
-		new DownloadImageTask(track.id, trackImageCache, track.artwork_url).execute();
+		new DownloadImageAsyncTask(track.id, trackImageCache, track.artwork_url).execute();
 	    } else {
 		holder.Avatar.setImageBitmap(artwork);
 	    }
@@ -90,7 +92,7 @@ public class SoundCloudActivityAdapter extends ArrayAdapter<SoundCloudActivity> 
 
 	final Bitmap avatar = userTrackImageCache.get(user.id);
 	if (avatar == null) {
-	    new DownloadImageTask(user.id, userTrackImageCache, user.avatar_url).execute();
+	    new DownloadImageAsyncTask(user.id, userTrackImageCache, user.avatar_url).execute();
 	} else {
 	    holder.Avatar.setImageBitmap(avatar);
 	}

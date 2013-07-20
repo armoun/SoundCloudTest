@@ -1,4 +1,4 @@
-package dev.emmaguy.soundcloudtest;
+package dev.emmaguy.soundcloudtest.async;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -12,13 +12,13 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class DownloadImageTask extends AsyncTask<Void, Void, byte[]> {
+public class DownloadImageAsyncTask extends AsyncTask<Void, Void, byte[]> {
     
     private final long id;
     private final Map<Long, Bitmap> bitmapCache;
     private String imageUrl;
 
-    public DownloadImageTask(long id, Map<Long, Bitmap> cache, String imageUrl) {
+    public DownloadImageAsyncTask(long id, Map<Long, Bitmap> cache, String imageUrl) {
 	this.id = id;
 	this.bitmapCache = cache;
 	this.imageUrl = imageUrl;
