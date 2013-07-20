@@ -45,6 +45,9 @@ public class TracksAdapter extends ArrayAdapter<Track> {
 	    v = vi.inflate(R.layout.listfragment_row_dashboard, null);
 
 	    holder = new ViewHolder();
+	    holder.Plays = (TextView) v.findViewById(R.id.textview_plays);
+	    holder.Favourites = (TextView) v.findViewById(R.id.textview_favourites);
+	    holder.Comments = (TextView) v.findViewById(R.id.textview_comments);
 	    holder.Username = (TextView) v.findViewById(R.id.textview_username);
 	    holder.CreatedAt = (TextView) v.findViewById(R.id.textview_created_at);
 	    holder.Title = (TextView) v.findViewById(R.id.textview_title);
@@ -65,7 +68,6 @@ public class TracksAdapter extends ArrayAdapter<Track> {
 	if (position % 2 == 0) {
 	    v.setBackgroundColor(evenRowColor);
 	} else {
-
 	    v.setBackgroundColor(oddRowColour);
 	}
     }
@@ -74,9 +76,13 @@ public class TracksAdapter extends ArrayAdapter<Track> {
 	final Track track = tracks.get(position);
 	final User user = track.user;
 
-	holder.Title.setText(track.title + " " + track.kind + " " + track.sharing);
+	holder.Title.setText(track.title);
 	holder.CreatedAt.setText(track.getCreatedAtDate());
 	holder.Username.setText(user.username);
+	
+	holder.Plays.setText(Integer.valueOf(track.playback_count).toString());
+	holder.Favourites.setText(Integer.valueOf(track.favoritings_count).toString());
+	holder.Comments.setText(Integer.valueOf(track.comment_count).toString());
 
 	final Bitmap artwork = trackImageCache.get(track.id);
 	if (artwork == null) {
@@ -98,5 +104,8 @@ public class TracksAdapter extends ArrayAdapter<Track> {
 	public TextView Title;
 	public TextView CreatedAt;
 	public TextView Username;
+	public TextView Plays;
+	public TextView Favourites;
+	public TextView Comments;
     }
 }

@@ -2,6 +2,7 @@ package dev.emmaguy.soundcloudtest.async;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class DownloadImageAsyncTask extends AsyncTask<Void, Void, byte[]> {
     private final long id;
     private final Map<Long, Bitmap> bitmapCache;
     private String imageUrl;
+    private boolean isMalformedUrl = false;
 
     public DownloadImageAsyncTask(long id, Map<Long, Bitmap> cache, String imageUrl) {
 	this.id = id;
@@ -25,6 +27,10 @@ public class DownloadImageAsyncTask extends AsyncTask<Void, Void, byte[]> {
     }
 
     protected byte[] doInBackground(Void... params) {
+	if(imageUrl == null || imageUrl.length() <= 0) {
+	    return null;
+	}
+	
 	try {
 	    InputStream in = new URL(imageUrl).openStream();
 	    BufferedInputStream bis = new BufferedInputStream(in);
@@ -36,14 +42,20 @@ public class DownloadImageAsyncTask extends AsyncTask<Void, Void, byte[]> {
 	    }
 
 	    return baf.toByteArray();
-	} catch (Exception e) {
-	    Log.e("SoundCloudTestApp", e.getClass().toString(), e);
+	} catch (MalformedURLException url) {
+	    isMalformedUrl = true;
+	}
+	catch (Exception e) {
+	    Log.e("SoundCloudTest", e.getClass().toString(), e);
 	}
 	return null;
     }
 
     protected void onPostExecute(byte[] bytes) {
-	if(bytes != null && bytes.length > 0) {
+	if(isMalformedUrl){
+	    bitmapCache.put(id, null);
+	}
+	else if(bytes != null && bytes.length > 0) {
 	    bitmapCache.put(id, BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
 	}
     }

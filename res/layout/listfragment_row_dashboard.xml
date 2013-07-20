@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/textview_username"
@@ -15,27 +15,54 @@
         android:id="@+id/textview_created_at"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/textview_username"
         android:layout_alignParentRight="true"
-        android:gravity="right|top"/>
+        android:layout_toRightOf="@id/textview_username"
+        android:gravity="right|top" />
 
     <ImageView
         android:id="@+id/imageview_avatar"
         android:layout_width="64dp"
         android:layout_height="64dp"
+        android:layout_below="@id/textview_username"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="8dp"
         android:contentDescription="@string/avatar"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/textview_username" />
+        android:gravity="top|center_horizontal" />
 
     <TextView
         android:id="@+id/textview_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="top"
-        android:paddingLeft="8dp"
+        android:layout_below="@id/textview_created_at"
         android:layout_toRightOf="@id/imageview_avatar"
-        android:layout_below="@id/textview_created_at" />
+        android:gravity="top"
+        android:paddingLeft="8dp" />
+
+    <TextView
+        android:id="@+id/textview_plays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_title"
+        android:layout_toRightOf="@id/imageview_avatar"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:id="@+id/textview_favourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_title"
+        android:layout_toRightOf="@id/textview_plays"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:id="@+id/textview_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_title"
+        android:layout_toRightOf="@id/textview_favourites"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

@@ -2,10 +2,11 @@ package dev.emmaguy.soundcloudtest;
 
 public class Track {
     public long id;
-    public long playback_count;
-    public long download_count;
-    public long favoritings_count;
-    public long comment_count;
+    
+    public int playback_count;
+    public int download_count;
+    public int favoritings_count;
+    public int comment_count;
     
     public String title;
     public String artwork_url;

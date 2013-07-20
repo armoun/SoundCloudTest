@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.soundcloud.api.ApiWrapper;
@@ -49,8 +50,12 @@ public class GetSoundCloudTracksAsyncTask extends ProgressAsyncTask<Void, Void, 
 	    wrapper.login(username, password);
 
 	    HttpResponse resp = wrapper.get(Request.to("/tracks"));
-	    jsonResponse = new JsonParser().parse(EntityUtils.toString(resp.getEntity())).getAsJsonArray().toString();
+	    
+	    final JsonArray jsonArray = new JsonParser().parse(EntityUtils.toString(resp.getEntity())).getAsJsonArray();
+	    jsonResponse = jsonArray.toString();
 
+	    Log.i("xx", "json: " + jsonArray.get(0));
+	    
 	    return resp.getStatusLine().getStatusCode() == 200;
 	} catch (IOException e) {
 	    Log.e("SoundCloudTest", "Failed to login", e);
