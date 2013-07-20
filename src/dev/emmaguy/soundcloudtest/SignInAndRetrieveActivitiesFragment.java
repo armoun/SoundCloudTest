@@ -30,7 +30,7 @@ public class SignInAndRetrieveActivitiesFragment extends Fragment implements OnC
 	    String username = getResources().getString(R.string.username);
 	    String password = getResources().getString(R.string.password);
 
-	    new GetSoundCloudActivitiesAsyncTask(clientId, clientSecret, username, password, getActivity(), "Authenticating and retrieving your dashboard...", listener).execute();
+	    new GetSoundCloudActivitiesAsyncTask(clientId, clientSecret, username, password, getActivity(), "Authenticating and retrieving your SoundCloud dashboard...", listener).execute();
 	}
     }
 

@@ -1,6 +1,7 @@
 package dev.emmaguy.soundcloudtest;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -11,7 +12,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.soundcloud.api.ApiWrapper;
@@ -57,14 +57,6 @@ public class GetSoundCloudActivitiesAsyncTask extends ProgressAsyncTask<Void, Vo
 	return false;
     }
 
-    class SoundCloudActivity {
-	String createdAt;
-	String userUsername;
-	String userAvatar;
-	String trackTitle;
-	String trackStreamUrl;
-    }
-
     @Override
     protected void onPostExecute(Boolean result) {
 	super.onPostExecute(result);
@@ -75,13 +67,40 @@ public class GetSoundCloudActivitiesAsyncTask extends ProgressAsyncTask<Void, Vo
 	}
 
 	if (listener != null) {
-	    List<SoundCloudActivity> activities = new Gson().fromJson(jsonResponse,
-		    new TypeToken<List<SoundCloudActivity>>() {
-		    }.getType());
-	    Log.i("xx", "count: " + activities.size());
-
+	    final Type type = new TypeToken<List<SoundCloudActivity>>() {}.getType();
+	    
+	    List<SoundCloudActivity> activities = new Gson().fromJson(jsonResponse, type);
 	    listener.onRetreivedActivities(activities);
 	}
+    }
+    
+    class SoundCloudActivity {
+	String created_at;
+	Origin origin;
+    }
+    
+    class Origin {
+	User user;
+	Track track;
+	
+	boolean hasTrack() {
+	    return track != null;
+	}
+    }
+    
+    class User
+    {
+	long id;
+	String username;
+	String avatar_url;
+    }
+    
+    class Track 
+    {
+	long id;
+	String title;
+	String artwork_url;
+	String stream_url;
     }
 
     public interface OnRetrievedActivitiesListener {

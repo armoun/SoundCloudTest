@@ -5,6 +5,7 @@ import java.util.List;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import dev.emmaguy.soundcloudtest.GetSoundCloudActivitiesAsyncTask.OnRetrievedActivitiesListener;
 import dev.emmaguy.soundcloudtest.GetSoundCloudActivitiesAsyncTask.SoundCloudActivity;
 
@@ -27,7 +28,8 @@ public class MainActivity extends FragmentActivity implements OnRetrievedActivit
     public void onRetreivedActivities(List<SoundCloudActivity> activities) {
 	SoundCloudActivitiesFragment fragment = new SoundCloudActivitiesFragment();
 	fragment.setArguments(activities);
-
+	Log.i("xx", "count: " + activities.size());
+	
 	FragmentTransaction transaction = (FragmentTransaction) getSupportFragmentManager().beginTransaction();
 	transaction.replace(R.id.fragment_container, fragment);
 	transaction.addToBackStack(null);
