@@ -14,6 +14,7 @@ public class Track {
     public String kind;
     public String sharing;
     public String created_at;
+    public String waveform_url;
     
     public User user;
     

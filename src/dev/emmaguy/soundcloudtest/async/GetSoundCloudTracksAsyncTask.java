@@ -53,9 +53,6 @@ public class GetSoundCloudTracksAsyncTask extends ProgressAsyncTask<Void, Void, 
 	    
 	    final JsonArray jsonArray = new JsonParser().parse(EntityUtils.toString(resp.getEntity())).getAsJsonArray();
 	    jsonResponse = jsonArray.toString();
-
-	    Log.i("xx", "json: " + jsonArray.get(0));
-	    
 	    return resp.getStatusLine().getStatusCode() == 200;
 	} catch (IOException e) {
 	    Log.e("SoundCloudTest", "Failed to login", e);

@@ -2,11 +2,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <Button
+    <ImageButton
         android:id="@+id/button_stream"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stream"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:src="@drawable/soundcloud_play"
+        android:contentDescription="@string/content"
+        android:scaleType="fitCenter"
+        android:background="@null" />
 
 </RelativeLayout>

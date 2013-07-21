@@ -38,7 +38,7 @@ public class SignInFragment extends Fragment implements OnClickListener {
 	    String password = ((EditText) getActivity().findViewById(R.id.edittext_password)).getText().toString();
 
 	    new GetSoundCloudTracksAsyncTask(clientId, clientSecret, username, password, getActivity(),
-		    "Authenticating and retrieving your SoundCloud dashboard...", listener).execute();
+		    "Authenticating and retrieving your Tracks...", listener).execute();
 	}
     }
 

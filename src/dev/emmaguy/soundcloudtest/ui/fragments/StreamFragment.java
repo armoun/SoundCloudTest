@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import dev.emmaguy.soundcloudtest.R;
 import dev.emmaguy.soundcloudtest.Track;
@@ -47,7 +47,7 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
 		mediaPlayer.release();
 		mediaPlayer = null;
 		
-		((Button) getActivity().findViewById(R.id.button_stream)).setText(getResources().getString(R.string.stream));
+		((ImageButton) getActivity().findViewById(R.id.button_stream)).setImageResource(R.drawable.soundcloud_play);
 		return;
 
 	    } else {
@@ -80,7 +80,7 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
     @Override
     public void onCompletion(MediaPlayer mp) {
 	Toast.makeText(getActivity(), "End of playback", Toast.LENGTH_SHORT).show();
-	((Button) getActivity().findViewById(R.id.button_stream)).setText(getResources().getString(R.string.again));
+	((ImageButton) getActivity().findViewById(R.id.button_stream)).setImageResource(R.drawable.soundcloud_play);
     }
 
     @Override
@@ -95,6 +95,6 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
 	Toast.makeText(getActivity(), "Prepared and ready to play - beginning playback", Toast.LENGTH_SHORT).show();
 	mp.start();
 
-	((Button) getActivity().findViewById(R.id.button_stream)).setText(getResources().getString(R.string.pause));
+	((ImageButton) getActivity().findViewById(R.id.button_stream)).setImageResource(R.drawable.soundcloud_pause);
     }
 }

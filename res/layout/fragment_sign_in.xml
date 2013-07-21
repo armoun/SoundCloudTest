@@ -4,39 +4,51 @@
 
     <Button
         android:id="@+id/button_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
         android:layout_centerInParent="true"
-        android:text="@string/login" 
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="25dp"
+        android:background="@drawable/soundcloud_colours"
+        android:text="@string/login"
+        android:textColor="#ffffff"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/edittext_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/button_login"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
         android:hint="@string/prompt_password"
         android:imeActionId="@+id/login"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionUnspecified"
         android:inputType="textPassword"
         android:maxLines="1"
-        android:singleLine="true" 
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/edittext_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/edittext_password"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:maxLines="1"
-        android:singleLine="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
+        android:singleLine="true" />
+
+    <ImageView
+        android:id="@+id/imageview_soundcloud_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/edittext_username"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/content"
+        android:src="@drawable/soundcloud_icon" />
 
 </RelativeLayout>
