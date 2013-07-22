@@ -14,7 +14,7 @@ import dev.emmaguy.soundcloudtest.R;
 import dev.emmaguy.soundcloudtest.Track;
 import dev.emmaguy.soundcloudtest.ui.TracksAdapter;
 
-public class DashboardFragment extends ListFragment {
+public class TracksFragment extends ListFragment {
 
     private final List<Track> tracks = new ArrayList<Track>();
     private OnSoundCloudActivitySelectedListener listener;
@@ -28,7 +28,7 @@ public class DashboardFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	return inflater.inflate(R.layout.fragment_dashboard, null);
+	return inflater.inflate(R.layout.fragment_tracks, null);
     }
 
     public void setArguments(List<Track> tracks) {

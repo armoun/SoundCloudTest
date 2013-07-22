@@ -2,15 +2,71 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+    <ImageView
+        android:id="@+id/imageview_avatar_stream"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="8dp"
+        android:contentDescription="@string/avatar"
+        android:gravity="top|left" />
+
+    <TextView
+        android:id="@+id/textview_created_at_stream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignTop="@id/imageview_avatar_stream"
+        android:layout_margin="5dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textview_username_stream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageview_avatar_stream"
+        android:layout_toLeftOf="@id/textview_created_at_stream"
+        android:layout_toRightOf="@id/imageview_avatar_stream"
+        android:paddingLeft="3dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textview_title_stream"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_username_stream"
+        android:layout_toRightOf="@id/imageview_avatar_stream"
+        android:padding="3dp" />
+
+    <ImageView
+        android:id="@+id/imageview_waveform_stream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_title_stream"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/avatar" />
+
     <ImageButton
         android:id="@+id/button_stream"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/stream"
         android:layout_centerInParent="true"
-        android:src="@drawable/soundcloud_play"
+        android:background="@null"
         android:contentDescription="@string/content"
         android:scaleType="fitCenter"
-        android:background="@null" />
+        android:src="@drawable/soundcloud_play"
+        android:text="@string/stream" />
+    
+       <ImageView
+        android:id="@+id/imageview_poweredby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:contentDescription="@string/content"
+        android:src="@drawable/soundcloud_powered_by" />
 
 </RelativeLayout>

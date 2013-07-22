@@ -1,11 +1,8 @@
 package dev.emmaguy.soundcloudtest.ui;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,20 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 import dev.emmaguy.soundcloudtest.R;
 import dev.emmaguy.soundcloudtest.Track;
 import dev.emmaguy.soundcloudtest.User;
-import dev.emmaguy.soundcloudtest.async.DownloadImageAsyncTask;
 
 public class TracksAdapter extends ArrayAdapter<Track> {
 
     private Context context;
     private List<Track> tracks;
-    private final int evenRowColor = Color.parseColor("#BBFAFEFA");
-    private final int oddRowColour = Color.parseColor("#BBCACACC");
-
-    private static final Map<Long, Bitmap> trackImageCache = new HashMap<Long, Bitmap>();
-    private static final Map<Long, Bitmap> userTrackImageCache = new HashMap<Long, Bitmap>();
+    private final int evenRowColor = Color.parseColor("#f2fbfc");
+    private final int oddRowColour = Color.parseColor("#e3efef");
 
     public TracksAdapter(Context c, int resourceId, List<Track> tracks) {
 	super(c, resourceId, tracks);
@@ -79,24 +75,15 @@ public class TracksAdapter extends ArrayAdapter<Track> {
 	holder.Title.setText(track.title);
 	holder.CreatedAt.setText(track.getCreatedAtDate());
 	holder.Username.setText(user.username);
-	
+
 	holder.Plays.setText(Integer.valueOf(track.playback_count).toString());
 	holder.Favourites.setText(Integer.valueOf(track.favoritings_count).toString());
 	holder.Comments.setText(Integer.valueOf(track.comment_count).toString());
 
-	final Bitmap artwork = trackImageCache.get(track.id);
-	if (artwork == null) {
-	    new DownloadImageAsyncTask(track.id, trackImageCache, track.artwork_url).execute();
-	} else {
-	    holder.Avatar.setImageBitmap(artwork);
-	}
-
-	final Bitmap avatar = userTrackImageCache.get(user.id);
-	if (avatar == null) {
-	    new DownloadImageAsyncTask(user.id, userTrackImageCache, user.avatar_url).execute();
-	} else {
-	    holder.Avatar.setImageBitmap(avatar);
-	}
+	Picasso.with(context)
+        .load(track.artwork_url)
+        .placeholder(R.drawable.contact_picture_placeholder)
+        .into(holder.Avatar);
     }
 
     class ViewHolder {

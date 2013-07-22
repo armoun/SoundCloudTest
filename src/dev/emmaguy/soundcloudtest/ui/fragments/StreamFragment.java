@@ -13,7 +13,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+
 import dev.emmaguy.soundcloudtest.R;
 import dev.emmaguy.soundcloudtest.Track;
 
@@ -29,6 +34,25 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
 	final View v = inflater.inflate(R.layout.fragment_stream, null);
 
 	v.findViewById(R.id.button_stream).setOnClickListener(this);
+	TextView username = (TextView) v.findViewById(R.id.textview_username_stream);
+	username.setText(track.user.username);
+
+	TextView createdAt = (TextView) v.findViewById(R.id.textview_created_at_stream);
+	createdAt.setText(track.getCreatedAtDate());
+
+	TextView title = (TextView) v.findViewById(R.id.textview_title_stream);
+	title.setText(track.title);
+
+	ImageView avatar = (ImageView) v.findViewById(R.id.imageview_avatar_stream);
+	Picasso.with(getActivity())
+	.load(track.artwork_url)
+	.placeholder(R.drawable.contact_picture_placeholder)
+	.into(avatar);
+
+	ImageView waveform = (ImageView) v.findViewById(R.id.imageview_waveform_stream);
+	Picasso.with(getActivity())
+	.load(track.waveform_url)
+	.into(waveform);
 
 	return v;
     }
@@ -46,8 +70,9 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
 		mediaPlayer.stop();
 		mediaPlayer.release();
 		mediaPlayer = null;
-		
-		((ImageButton) getActivity().findViewById(R.id.button_stream)).setImageResource(R.drawable.soundcloud_play);
+
+		((ImageButton) getActivity().findViewById(R.id.button_stream))
+			.setImageResource(R.drawable.soundcloud_play);
 		return;
 
 	    } else {
