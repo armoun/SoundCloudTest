@@ -117,7 +117,6 @@ public class StreamFragment extends Fragment implements OnClickListener, OnPrepa
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-	Toast.makeText(getActivity(), "Prepared and ready to play - beginning playback", Toast.LENGTH_SHORT).show();
 	mp.start();
 
 	((ImageButton) getActivity().findViewById(R.id.button_stream)).setImageResource(R.drawable.soundcloud_pause);
