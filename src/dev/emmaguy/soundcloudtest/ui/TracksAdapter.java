@@ -80,8 +80,13 @@ public class TracksAdapter extends ArrayAdapter<Track> {
 	holder.Favourites.setText(Integer.valueOf(track.favoritings_count).toString());
 	holder.Comments.setText(Integer.valueOf(track.comment_count).toString());
 
+	String url = track.artwork_url;
+	if(url == null || url.length() <= 0) {
+	    url = user.avatar_url;
+	}
+	
 	Picasso.with(context)
-        .load(track.artwork_url)
+        .load(url)
         .placeholder(R.drawable.contact_picture_placeholder)
         .into(holder.Avatar);
     }
